@@ -1,0 +1,84 @@
+<div ng-controller="JogadoresCtrl">
+<h3>Jogadores</h3>
+
+<!--
+<div class="row">
+<fieldset>
+<label for="estilo">Jogador</label>
+<input id="estilo" name="estilo" type="text" list="listaestilos"/>
+<datalist id="listaestilos"><br/>
+<option ng-repeat="jogador in jogadores" value="{{ jogador.apelido }}">{{ jogador.nome }}</option>
+</datalist>
+</fieldset>
+</div>		
+-->
+<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-3 form-group">
+<div class="input-group input-group-sm">
+  <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+	<input type="text" class="form-control" id="query" ng-model="query" placeholder="Pesquisar ...">
+</div>		
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-8 col-sm-8 col-md-6">
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Jogador</th>
+						<th>Apelido</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="{{ jogador.id }}" ng-repeat="jogador in jogadores | filter:query">
+						<td>{{ jogador.id }}</td>
+						<td>{{ jogador.nome }}</td>
+						<td>{{ jogador.apelido }}</td>
+						<td class="text-right">
+							<button id="{{ jogador.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="left" tooltip="Alterar" ng-click="setaJogador(jogador.id)">
+							<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+							<button id="{{ jogador.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Excluir" ng-click="clearJogador(jogador.id)">
+							<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>      
+</div>
+<div class="row {{estadoInsert}}">
+	    <form class="form-horizontal" ng-submit="addJogador()">
+	<div class="col-xs-6 col-sm-6 col-md-3">
+	    	<input class="form-control input-sm" type="text" ng-model="jogadorNome" placeholder="Nome">
+</div>
+	<div class="col-xs-6 col-sm-6 col-md-2">
+	    	<input class="form-control input-sm" type="text" ng-model="jogadorApelido" placeholder="Apelido">
+</div>
+	<div class="col-xs-6 col-sm-6 col-md-1">
+			<button type="submit" class="btn btn-default btn-sm btn-info btn-block"><span class="glyphicon glyphicon-plus"></span> Inserir</button>
+</div>
+    	</form>
+</div>
+<div class="row">
+</div>
+<div class="row {{estadoUpdate}}">
+	    <form class="form-horizontal" ng-submit="updateJogador(jogadorUpId)">
+	<div class="col-xs-6 col-sm-6 col-md-2">
+	    	<input class="form-control input-sm" type="text" ng-model="jogadorUpNome" placeholder="Nome">
+</div>
+	<div class="col-xs-6 col-sm-6 col-md-2">
+	    	<input class="form-control input-sm" type="text" ng-model="jogadorUpApelido" placeholder="Apelido">
+</div>
+	<div class="col-xs-6 col-sm-6 col-md-2 text-right">
+			<button type="submit" class="btn btn-default btn-sm btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+			<button type="reset" class="btn btn-default btn-sm btn-danger" tooltip-placement="top" tooltip="Cancelar a alteração" ng-click="cancelaEdicao()" ><span class="glyphicon glyphicon-remove"></span></button>
+</div>
+    	</form>
+</div>
+</div>
