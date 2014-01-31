@@ -3,6 +3,8 @@ class EtapaJogador extends Eloquent
 {
 	protected $table = 'etapa_jogadores';
 
+	public $timestamps = false;
+
 	public function etapa()
 	{
 		return $this->belongsTo('Etapa');

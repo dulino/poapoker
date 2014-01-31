@@ -16,6 +16,7 @@ function JogadoresCtrl($scope, $http) {
       $scope.jogadorUpApelido = 'Teste2';
       $scope.jogadorNome = '';
       $scope.jogadorApelido = '';
+      $scope.query = '';
 
     }).error(function(data, status) {
       console.log('Status: ' + status);
@@ -83,5 +84,12 @@ function JogadoresCtrl($scope, $http) {
         .error(function(data, status) {
           console.log(status);
         });
+  }
+
+  $scope.searchJogador = function (item){
+    if (item.nome.indexOf($scope.query)!=-1 || item.apelido.indexOf($scope.query)!=-1) {
+      return true;
+    }
+    return false;
   }
 } 

@@ -18,8 +18,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-resource.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/rankingsController.js"></script>
+    <script src="js/controllers/jogadores.js"></script>
+    <script src="js/controllers/rankings.js"></script>
+    <script src="js/controllers/etapas.js"></script>
     <script src="js/app.js"></script>
 
     <script src="https://code.jquery.com/jquery.js"></script>

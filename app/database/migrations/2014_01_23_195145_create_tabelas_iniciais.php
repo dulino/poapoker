@@ -16,13 +16,11 @@ class CreateTabelasIniciais extends Migration {
 			$table->increments('id');
 			$table->string('apelido', 128)->unique();
 			$table->string('nome');
-			$table->timestamps();
 		});
 
 		Schema::create('rankings', function($table) {
 			$table->increments('id');
 			$table->string('descricao', 128)->unique();
-			$table->timestamps();
 		});
 
 		Schema::create('etapas', function($table)
@@ -35,7 +33,6 @@ class CreateTabelasIniciais extends Migration {
 			$table->decimal('valor_addon', 8, 2)->nullable()->default('0');
 			$table->integer('fichas_addon')->unsigned()->nullable()->default('1000');
 			$table->integer('ranking_id')->unsigned();
-			$table->timestamps();
 			$table->foreign('ranking_id')->references('id')->on('rankings');
 		});
 
@@ -47,7 +44,6 @@ class CreateTabelasIniciais extends Migration {
 			$table->integer('addons')->unsigned()->default(0);
 			$table->integer('posicao')->unsigned()->nullable();
 			$table->integer('pontos')->unsigned()->nullable();
-			$table->timestamps();
 			$table->foreign('etapa_id')->references('id')->on('etapas');
 			$table->foreign('jogador_id')->references('id')->on('jogadores');
 			$table->unique(array('etapa_id', 'jogador_id'));

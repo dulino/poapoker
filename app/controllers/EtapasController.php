@@ -13,7 +13,7 @@ class EtapasController extends BaseController
 	 */
 	public function index()
 	{
-		return Etapa::all(array('nome'))->toJson();
+		return Etapa::with('ranking')->get()->toJson();
 	}
 
 }

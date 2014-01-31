@@ -18,7 +18,6 @@ Route::get('/', function() {
 	return View::make('layouts.master');
 });
 
-Route::resource('shop', 'ShoppingController');
 Route::resource('jogadores', 'JogadoresController');
 Route::resource('rankings', 'RankingsController');
 Route::resource('etapas', 'EtapasController');
