@@ -16,4 +16,19 @@ class EtapasController extends BaseController
 		return Etapa::with('ranking')->get()->toJson();
 	}
 
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$etapa = Etapa::find($id);
+
+		if(!$etapa)
+			return false;
+	
+		$etapa->delete();
+	}
 }

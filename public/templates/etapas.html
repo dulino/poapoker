@@ -1,5 +1,5 @@
 <div ng-controller="EtapasCtrl">
-<h3>Etapas Alterado em Pelotas</h3>
+<h3>Etapas</h3>
 <div class="row">
 	<div class="col-xs-6 col-sm-6 col-md-3 form-group">
 		<div class="input-group input-group-sm">
@@ -38,7 +38,7 @@
 						<td class="text-right">{{ etapa.fichas_addon }}</td>
 						<td class="text-right">{{ etapa.ranking.descricao }}</td>
 						<td class="text-right">
-							<button id="{{ etapa.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Excluir" >
+							<button id="{{ etapa.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Excluir"  ng-click="clearEtapa(etapa.id)">
 								<span class="glyphicon glyphicon-trash"></span>
 							</button>
 						</td>

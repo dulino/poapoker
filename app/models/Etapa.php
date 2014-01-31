@@ -16,4 +16,11 @@ class Etapa extends Eloquent
 		return $this->hasMany('EtapaJogador');
 	}
 
+	public function delete() 
+	{
+        $this->jogadores()->delete();
+
+        return parent::delete();
+	}
+
 }

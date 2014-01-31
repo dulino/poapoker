@@ -21,4 +21,17 @@ function EtapasCtrl($scope, $http) {
     }).error(function(data, status) {
       console.log('Status: ' + status);
     });
+
+
+  $scope.clearEtapa = function(etapaId) {
+    $http.delete('/etapas/' + etapaId)
+      .success(function(data, status) {
+        $scope.etapas = _.filter($scope.etapas, function(etapa) {
+          return !(etapa.id == parseInt(etapaId));
+        });
+      })
+      .error(function(data, status) {
+        console.log(data.error.message);
+      });
+  }
 }
