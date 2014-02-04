@@ -21,3 +21,9 @@ Route::get('/', function() {
 Route::resource('jogadores', 'JogadoresController');
 Route::resource('rankings', 'RankingsController');
 Route::resource('etapas', 'EtapasController');
+Route::resource('etapajogadores', 'EtapaJogadoresController');
+
+Route::get('detalhes/etapa/{id}', function($id)
+{
+  return Etapa::with('jogadores')->with('jogadores.jogador')->find($id)->toJson();
+});

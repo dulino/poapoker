@@ -1,0 +1,97 @@
+<div ng-controller="DetalhesEtapaCtrl">
+	<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-4">
+		<h3><span editable-text="etapa.nome">{{ etapa.nome || 'Informar nome' }}</span></h3>
+		<table class="table table-hover table-condensed">
+			<tbody>
+				<tr>
+					<td><strong>Data</strong></td>
+					<td class="text-right"><span editable-date="etapa.data">{{ etapa.data || 'vazio' | date:"dd/MM/yyyy" }}</span></td>
+				</tr>
+				<tr>
+					<td><strong>Valor Buy-in</strong></td>
+					<td class="text-right"><span editable-text="etapa.valor_buyin">{{ etapa.valor_buyin }}</span></td>
+				</tr>
+				<tr>
+					<td><strong>Fichas Buy-in</strong></td>
+					<td class="text-right"><span editable-text="etapa.fichas_buyin">{{ etapa.fichas_buyin }}</span></td>
+				</tr>
+				<tr>
+					<td><strong>Valor Add-on</strong></td>
+					<td class="text-right"><span editable-text="etapa.valor_addon">{{ etapa.valor_addon | currency:"R$ "}}</span></td>
+				</tr>
+				<tr>
+					<td><strong>Fichas Add-on</strong></td>
+					<td class="text-right"><span editable-text="etapa.fichas_addon">{{ etapa.fichas_addon }}</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-xs-6 col-sm-6 col-md-4">
+		<h3>&nbsp;</h3>
+		<table class="table table-hover table-condensed">
+			<tbody>
+				<tr>
+					<td><strong>Total de Jogadores</strong></td>
+					<td class="text-right">{{ etapa.jogadores.length }}</td>
+				</tr>
+				<tr>
+					<td><strong>Jogando</strong></td>
+					<td class="text-right">{{ jogando }}</td>
+				</tr>
+				<tr>
+					<td><strong>Rebuys</strong></td>
+					<td class="text-right">{{ qtdRebuys }}</td>
+				</tr>
+				<tr>
+					<td><strong>Add-ons</strong></td>
+					<td class="text-right">{{ qtdAddons }}</td>
+				</tr>
+				<tr>
+					<td><strong>Total de Fichas</strong></td>
+					<td class="text-right">{{ ((etapa.jogadores.length + qtdRebuys)*etapa.fichas_buyin) + (qtdAddons * etapa.fichas_addon) | number:0 }}</td>
+				</tr>
+				<tr ng-show="(jogando > 0)">
+					<td><strong>Méida de Fichas</strong></td>
+					<td class="text-right">{{ (((etapa.jogadores.length + qtdRebuys)*etapa.fichas_buyin) + (qtdAddons * etapa.fichas_addon))/jogando | number:0 }}</td>
+				</tr>
+				<tr>
+					<td><strong>Arrecadado</strong></td>
+					<td class="text-right">{{ ((etapa.jogadores.length + qtdRebuys)*etapa.valor_buyin) + (qtdAddons * etapa.valor_addon)  | currency:"R$ " }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+	<div class="row">
+		<h3>Jogadores</h3>
+	</div>
+	<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-8">
+		<table class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th>Pos</th>
+					<th>Jogador</th>
+					<th>Add-on</th>
+					<th>Rebuy</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="{{ jogador.id }}" ng-repeat="jogador in etapa.jogadores | orderBy:'posicao'">
+					<td>{{ jogador.posicao }}</td>
+					<td>{{ jogador.jogador.apelido }}</td>
+					<td>{{ jogador.addons }}</td>
+					<td>{{ jogador.rebuys }}</td>
+					<td class="text-right">
+						<button id="{{ jogador.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Excluir" ng-click="clearJogadorEtapa(jogador.id)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</div>

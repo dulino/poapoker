@@ -1,5 +1,6 @@
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
 body {
 	background-image: url("/images/background.png");
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+

@@ -26,15 +26,15 @@ class TabelasIniciaisSeeder extends Seeder {
         Etapa::create(array('nome' => 'Etapa 1', 'data' => '2014-02-11','ranking_id' => '1'));
         Etapa::create(array('nome' => 'Etapa 2', 'data' => '2014-03-04','ranking_id' => '1'));
 
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '1', 'posicao' => '1', 'pontos' => '18'));
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '2', 'posicao' => '2', 'pontos' => '16'));
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '3', 'posicao' => '3', 'pontos' => '14'));
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '4', 'posicao' => '4', 'pontos' => '12'));
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '5', 'posicao' => '5', 'pontos' => '10'));
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '6', 'posicao' => '6', 'pontos' => '8'));
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '7', 'posicao' => '7', 'pontos' => '6'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '1', 'pontos' => '18', 'addons' => '1'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '2', 'pontos' => '16', 'rebuys' => '1', 'addons' => '1'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '3', 'pontos' => '14', 'addons' => '1'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '4', 'posicao' => '4', 'pontos' => '12', 'addons' => '1'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '5', 'posicao' => '5', 'pontos' => '10', 'rebuys' => '1', 'addons' => '1'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '6', 'posicao' => '6', 'pontos' => '8', 'addons' => '1'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '7', 'posicao' => '7', 'pontos' => '6', 'rebuys' => '1', 'addons' => '1'));
         EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '8', 'posicao' => '8', 'pontos' => '4'));
-        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '9', 'posicao' => '9', 'pontos' => '2'));
+        EtapaJogador::create(array('etapa_id' => '1', 'jogador_id' => '9', 'posicao' => '9', 'pontos' => '2', 'rebuys' => '2'));
 
         EtapaJogador::create(array('etapa_id' => '2', 'jogador_id' => '01', 'posicao' => '1', 'pontos' => '8'));
         EtapaJogador::create(array('etapa_id' => '2', 'jogador_id' => '10', 'posicao' => '2', 'pontos' => '6'));

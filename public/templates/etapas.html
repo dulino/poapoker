@@ -38,6 +38,9 @@
 						<td class="text-right">{{ etapa.fichas_addon }}</td>
 						<td class="text-right">{{ etapa.ranking.descricao }}</td>
 						<td class="text-right">
+							<a href="#/detalhes/etapa/{{etapa.id}}"><button id="{{ etapa.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Detalhes" >
+								<span class="glyphicon glyphicon-trash"></span>
+							</button></a>
 							<button id="{{ etapa.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Excluir"  ng-click="clearEtapa(etapa.id)">
 								<span class="glyphicon glyphicon-trash"></span>
 							</button>

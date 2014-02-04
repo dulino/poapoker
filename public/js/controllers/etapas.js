@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-var rankingController = angular.module('etapasController', []);
+var etapaController = angular.module('etapasController', []);
  
 function EtapasCtrl($scope, $http) {
 
