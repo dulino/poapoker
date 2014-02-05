@@ -8,6 +8,11 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
 
   $scope.teste = $routeParams.etapaId;
 
+  $http({ method: 'GET', url: 'jogadores', cache: false }).
+    success(function(data, status) {
+      $scope.listaJogadores = data;
+  });
+
   $http({ method: 'GET', url: 'detalhes/etapa/' + $routeParams.etapaId, cache: false }).
     success(function(data, status) {
       $scope.etapa = data;
@@ -31,6 +36,125 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
       console.log('Status: ' + status);
     });
 
+  $scope.updateNomeEtapa = function(data) {
+    $http.put('/etapas/' + $scope.etapa.id, { campo: 'nome', nome: data })
+      .success(function(data, status) {
+        console.log(data);
+        return true;
+      })
+      .error(function(data, status) {
+        console.log(data);
+      });
+  }
+
+  $scope.updateDataEtapa = function(data) {
+    $http.put('/etapas/' + $scope.etapa.id, { campo: 'data', data: data })
+      .success(function(data, status) {
+        console.log(data);
+        return true;
+      })
+      .error(function(data, status) {
+        console.log(data);
+      });
+  }
+
+  $scope.updateValorBuyinEtapa = function(data) {
+    $http.put('/etapas/' + $scope.etapa.id, { campo: 'valor_buyin', valor_buyin: data })
+      .success(function(data, status) {
+        console.log(data);
+        return true;
+      })
+      .error(function(data, status) {
+        console.log(data);
+      });
+  }
+
+  $scope.updateFichasBuyinEtapa = function(data) {
+    $http.put('/etapas/' + $scope.etapa.id, { campo: 'fichas_buyin', fichas_buyin: data })
+      .success(function(data, status) {
+        console.log(data);
+        return true;
+      })
+      .error(function(data, status) {
+        console.log(data);
+      });
+  }
+
+  $scope.updateValorAddonEtapa = function(data) {
+    $http.put('/etapas/' + $scope.etapa.id, { campo: 'valor_addon', valor_addon: data })
+      .success(function(data, status) {
+        console.log(data);
+        return true;
+      })
+      .error(function(data, status) {
+        console.log(data);
+      });
+  }
+
+  $scope.updateFichasAddonEtapa = function(data) {
+    $http.put('/etapas/' + $scope.etapa.id, { campo: 'fichas_addon', fichas_addon: data })
+      .success(function(data, status) {
+        console.log(data);
+        return true;
+      })
+      .error(function(data, status) {
+        console.log(data);
+      });
+  }
+
+  $scope.alteraAddon = function(etapaJogadorId, data) {
+      $http.post('/detalhes/alteraaddon/' + etapaJogadorId, { addons: data } )
+        .success(function(data, status) {
+          console.log(data);
+          return true;
+        })
+        .error(function(data, status) {
+          console.log(data);
+        });
+  }
+
+  $scope.alteraRebuy = function(etapaJogadorId, data) {
+      $http.post('/detalhes/alterarebuy/' + etapaJogadorId, { rebuys: data } )
+        .success(function(data, status) {
+          console.log(data);
+          return true;
+        })
+        .error(function(data, status) {
+          console.log(data);
+        });
+  }
+
+  $scope.updateInfos = function() {
+        $scope.qtdRebuys = 0;
+        $scope.qtdAddons = 0;
+        $scope.eliminados = 0;
+        $scope.jogando    = 0;
+        angular.forEach($scope.etapa.jogadores, function(jogador) {
+          $scope.qtdRebuys += jogador.rebuys;
+          $scope.qtdAddons += jogador.addons;
+          if (jogador.posicao > 0) {
+            $scope.eliminados += 1;
+          }else {
+            $scope.jogando += 1;
+          }
+        });
+      }
+
+
+  $scope.addEtapaJogador = function() {
+      $http.post('/etapajogadores', { etapaid: $scope.etapa.id, apelido: $scope.jogadorApelido } )
+        .success(function(data, status) {
+          if(data) {
+            $scope.jogadorApelido  = '';
+            $scope.etapa.jogadores = data.jogadores;
+          } else {
+            console.log('There was a problem. Status: ' + status + '; Data: ' + data);
+          }
+        })
+        .error(function(data, status) {
+          console.log('status: ' + status);
+        });
+  }
 
   $scope.clearJogadorEtapa = function(jogadorId) {
 

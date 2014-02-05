@@ -1,28 +1,28 @@
 <div ng-controller="DetalhesEtapaCtrl">
 	<div class="row">
 	<div class="col-xs-6 col-sm-6 col-md-4">
-		<h3><span editable-text="etapa.nome">{{ etapa.nome || 'Informar nome' }}</span></h3>
+		<h3><span editable-text="etapa.nome" onbeforesave="updateNomeEtapa($data)">{{ etapa.nome || 'Informar nome' }}</span></h3>
 		<table class="table table-hover table-condensed">
 			<tbody>
 				<tr>
 					<td><strong>Data</strong></td>
-					<td class="text-right"><span editable-date="etapa.data">{{ etapa.data || 'vazio' | date:"dd/MM/yyyy" }}</span></td>
+					<td class="text-right"><span editable-date="etapa.data" onbeforesave="updateDataEtapa($data)">{{ etapa.data || 'vazio' | date:"dd/MM/yyyy" }}</span></td>
 				</tr>
 				<tr>
 					<td><strong>Valor Buy-in</strong></td>
-					<td class="text-right"><span editable-text="etapa.valor_buyin">{{ etapa.valor_buyin }}</span></td>
+					<td class="text-right"><span editable-text="etapa.valor_buyin" onbeforesave="updateValorBuyinEtapa($data)">{{ etapa.valor_buyin }}</span></td>
 				</tr>
 				<tr>
 					<td><strong>Fichas Buy-in</strong></td>
-					<td class="text-right"><span editable-text="etapa.fichas_buyin">{{ etapa.fichas_buyin }}</span></td>
+					<td class="text-right"><span editable-text="etapa.fichas_buyin" onbeforesave="updateFichasBuyinEtapa($data)">{{ etapa.fichas_buyin }}</span></td>
 				</tr>
 				<tr>
 					<td><strong>Valor Add-on</strong></td>
-					<td class="text-right"><span editable-text="etapa.valor_addon">{{ etapa.valor_addon | currency:"R$ "}}</span></td>
+					<td class="text-right"><span editable-text="etapa.valor_addon" onbeforesave="updateValorAddonEtapa($data)">{{ etapa.valor_addon | currency:"R$ "}}</span></td>
 				</tr>
 				<tr>
 					<td><strong>Fichas Add-on</strong></td>
-					<td class="text-right"><span editable-text="etapa.fichas_addon">{{ etapa.fichas_addon }}</span></td>
+					<td class="text-right"><span editable-text="etapa.fichas_addon" onbeforesave="updateFichasAddonEtapa($data)">{{ etapa.fichas_addon }}</span></td>
 				</tr>
 			</tbody>
 		</table>
@@ -64,7 +64,22 @@
 	</div>
 	</div>
 	<div class="row">
-		<h3>Jogadores</h3>
+		<div class="col-xs-6 col-sm-6 col-md-4">
+			<h3>Jogadores</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-sm-6 col-md-4">
+			<form class="form-inline" ng-submit="addEtapaJogador()">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+					<input class="form-control input-sm" type="text" ng-model="jogadorApelido" placeholder="Inserir jogador..." list="listajogadores">
+				</div>		
+				<datalist id="listajogadores"><br/>
+					<option ng-repeat="jogador in listaJogadores" value="{{ jogador.apelido }}">{{ jogador.nome }}</option>
+				</datalist>
+    		</form>
+    	</div>
 	</div>
 	<div class="row">
 	<div class="col-xs-6 col-sm-6 col-md-8">
@@ -82,8 +97,8 @@
 				<tr id="{{ jogador.id }}" ng-repeat="jogador in etapa.jogadores | orderBy:'posicao'">
 					<td>{{ jogador.posicao }}</td>
 					<td>{{ jogador.jogador.apelido }}</td>
-					<td>{{ jogador.addons }}</td>
-					<td>{{ jogador.rebuys }}</td>
+					<td><span editable-number="jogador.addons" buttons="no" onbeforesave="alteraAddon(jogador.id, $data)" onaftersave="updateInfos()">{{ jogador.addons }}</span></td>
+					<td><span editable-number="jogador.rebuys" buttons="no" onbeforesave="alteraRebuy(jogador.id, $data)" onaftersave="updateInfos()">{{ jogador.rebuys }}</span></td>
 					<td class="text-right">
 						<button id="{{ jogador.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Excluir" ng-click="clearJogadorEtapa(jogador.id)">
 							<span class="glyphicon glyphicon-trash"></span>
