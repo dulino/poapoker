@@ -48,6 +48,17 @@ class CreateTabelasIniciais extends Migration {
 			$table->foreign('jogador_id')->references('id')->on('jogadores');
 			$table->unique(array('etapa_id', 'jogador_id'));
 		});
+
+
+		Schema::create('pontuacoes', function($table)
+		{
+			$table->increments('id');
+			$table->integer('ranking_id')->unsigned();
+			$table->integer('qtd_jogadores')->unsigned();
+			$table->integer('posicao')->unsigned();
+			$table->integer('pontos')->unsigned();
+			$table->foreign('ranking_id')->references('id')->on('rankings');
+		});
 	}
 
 	/**
@@ -57,6 +68,7 @@ class CreateTabelasIniciais extends Migration {
 	 */
 	public function down()
 	{
+		Schema::drop('pontuacoes');
 		Schema::drop('etapa_jogadores');
 		Schema::drop('etapas');
 		Schema::drop('rankings');

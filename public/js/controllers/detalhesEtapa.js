@@ -6,7 +6,7 @@ var detalhesEtapaController = angular.module('detalhesEtapaController', []);
  
 function DetalhesEtapaCtrl($scope, $http, $routeParams) {
 
-  $scope.teste = $routeParams.etapaId;
+  $scope.teste = parseInt("1");
 
   $http({ method: 'GET', url: 'jogadores', cache: false }).
     success(function(data, status) {
@@ -23,8 +23,10 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
         $scope.eliminados = 0;
         $scope.jogando    = 0;
         angular.forEach(jogadores, function(jogador) {
-          $scope.qtdRebuys += jogador.rebuys;
-          $scope.qtdAddons += jogador.addons;
+          jogador.addons = parseInt(jogador.addons);
+          jogador.rebuys = parseInt(jogador.rebuys);
+          $scope.qtdRebuys += parseInt(jogador.rebuys);
+          $scope.qtdAddons += parseInt(jogador.addons);
           if (jogador.posicao > 0) {
             $scope.eliminados += 1;
           }else {
@@ -130,8 +132,8 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
         $scope.eliminados = 0;
         $scope.jogando    = 0;
         angular.forEach($scope.etapa.jogadores, function(jogador) {
-          $scope.qtdRebuys += jogador.rebuys;
-          $scope.qtdAddons += jogador.addons;
+          $scope.qtdRebuys += parseInt(jogador.rebuys);
+          $scope.qtdAddons += parseInt(jogador.addons);
           if (jogador.posicao > 0) {
             $scope.eliminados += 1;
           }else {
@@ -171,4 +173,17 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
   
   }
 
+  $scope.eliminarJogadorEtapa = function(etapaJogadorId) {
+      $http.post('/detalhes/eliminajogador/' + etapaJogadorId )
+        .success(function(data, status) {
+          console.log(data);
+          $http({ method: 'GET', url: 'detalhes/etapa/' + $routeParams.etapaId, cache: false }).
+            success(function(data, status) {
+              $scope.etapa.jogadores = data.jogadores;
+            });
+        })
+        .error(function(data, status) {
+          console.log(data);
+        });
+  }
 }

@@ -52,7 +52,7 @@
 					<td class="text-right">{{ ((etapa.jogadores.length + qtdRebuys)*etapa.fichas_buyin) + (qtdAddons * etapa.fichas_addon) | number:0 }}</td>
 				</tr>
 				<tr ng-show="(jogando > 0)">
-					<td><strong>Méida de Fichas</strong></td>
+					<td><strong>Média de Fichas</strong></td>
 					<td class="text-right">{{ (((etapa.jogadores.length + qtdRebuys)*etapa.fichas_buyin) + (qtdAddons * etapa.fichas_addon))/jogando | number:0 }}</td>
 				</tr>
 				<tr>
@@ -82,7 +82,7 @@
     	</div>
 	</div>
 	<div class="row">
-	<div class="col-xs-6 col-sm-6 col-md-8">
+	<div class="col-xs-12 col-sm-12 col-md-8">
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -90,15 +90,20 @@
 					<th>Jogador</th>
 					<th>Add-on</th>
 					<th>Rebuy</th>
+					<th>Pontos</th>
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr id="{{ jogador.id }}" ng-repeat="jogador in etapa.jogadores | orderBy:'posicao'">
 					<td>{{ jogador.posicao }}</td>
-					<td>{{ jogador.jogador.apelido }}</td>
-					<td><span editable-number="jogador.addons" buttons="no" onbeforesave="alteraAddon(jogador.id, $data)" onaftersave="updateInfos()">{{ jogador.addons }}</span></td>
-					<td><span editable-number="jogador.rebuys" buttons="no" onbeforesave="alteraRebuy(jogador.id, $data)" onaftersave="updateInfos()">{{ jogador.rebuys }}</span></td>
+					<td><button id="{{ jogador.id }}" type="button" ng-show="!(jogador.posicao > 0)" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Eliminado" ng-click="eliminarJogadorEtapa(jogador.id)">
+							<span class="glyphicon glyphicon-screenshot"></span>
+						</button> {{ jogador.jogador.apelido }}
+					</td>
+					<td><span editable-number="jogador.addons" onbeforesave="alteraAddon(jogador.id, $data)" onaftersave="updateInfos()">{{ jogador.addons }}</span></td>
+					<td><span editable-number="jogador.rebuys" onbeforesave="alteraRebuy(jogador.id, $data)" onaftersave="updateInfos()">{{ jogador.rebuys }}</span></td>
+					<td>{{ jogador.pontos }}</td>
 					<td class="text-right">
 						<button id="{{ jogador.id }}" type="button" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Excluir" ng-click="clearJogadorEtapa(jogador.id)">
 							<span class="glyphicon glyphicon-trash"></span>

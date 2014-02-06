@@ -46,9 +46,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Jogadores</a></li>
-            <li><a href="#about">Ranking</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#/rankings">Ranking</a></li>
+            <li><a href="#/etapas">Etapas</a></li>
+            <li><a href="#">Jogadores</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -61,11 +61,6 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

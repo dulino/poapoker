@@ -25,9 +25,10 @@ Route::resource('etapajogadores', 'EtapaJogadoresController');
 
 Route::get('detalhes/etapa/{id}', function($id)
 {
-  return Etapa::with('jogadores')->with('jogadores.jogador')->find($id)->toJson();
+  return Etapa::with('jogadores')->with('jogadores.jogador')->find($id);
 });
 
 Route::post('detalhes/alteraaddon/{id}', 'EtapaJogadoresController@alteraAddon');
 Route::post('detalhes/alterarebuy/{id}', 'EtapaJogadoresController@alteraRebuy');
+Route::post('detalhes/eliminajogador/{id}', 'EtapaJogadoresController@eliminarJogadorEtapa');
 
