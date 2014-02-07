@@ -4,21 +4,6 @@ class EtapaJogadoresController extends BaseController
 {
 	protected $layout = 'layouts.master';
 
-    public function atualizaPontosPosicoes($etapaId) {
-		$jogadores = EtapaJogador::where('etapa_id', '=', $etapaId)->orderBy('posicao', 'DESC')->get();
-
-		$pos = $jogadores->count();
-		
-		foreach ($jogadores as $jogador) {
-			if ($jogador->posicao > 0) {
-				$jogador->posicao = $pos;
-				$jogador->save();
-				$pos = $pos - 1;
-			}
-		}
-    }
-
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -38,7 +23,7 @@ class EtapaJogadoresController extends BaseController
 					$etapajogador->etapa_id = $etapaid;
 					$etapajogador->jogador_id = $jogador->id;
 					$etapajogador->save();
-					$this->atualizaPontosPosicoes($etapaid);
+					$etapajogador->atualizaPontosPosicoes($etapaid);
 					return Etapa::with('jogadores')->with('jogadores.jogador')->find($etapaid);
 				} else {
 					return 0;
@@ -65,8 +50,7 @@ class EtapaJogadoresController extends BaseController
 
 		$etapaJogador->delete();
 
-		$this->atualizaPontosPosicoes($etapaId);
-
+		$etapaJogador->atualizaPontosPosicoes($etapaId);
 	}
 
 	public function alteraAddon($id)
@@ -88,21 +72,15 @@ class EtapaJogadoresController extends BaseController
 	public function eliminarJogadorEtapa($id)
 	{
 		$etapaJogador = EtapaJogador::find($id);
-		$etapaId = $etapaJogador->etapa_id;
 
-		if(!$etapaJogador)
-			return false;
-
-		$total = EtapaJogador::where('etapa_id', '=', $etapaId)->count();
-		$eliminados = EtapaJogador::where('etapa_id', '=', $etapaId)->where('posicao', '>', 0)->count();
-
-		$etapaJogador->posicao = $total - $eliminados;
-		$pontuacao = Pontuacao::where('ranking_id', '=', '1')
-		               ->where('qtd_jogadores', '=', $total)
-		               ->where('posicao', '=', $etapaJogador->posicao)->first();
-		$etapaJogador->pontos = $pontuacao->pontos;
-		$etapaJogador->save();
-
-		return $pontuacao->pontos;
+		if(!$etapaJogador) {
+			return 0;
+		} else {
+			if ($etapaJogador->eliminaJogadorDaEtapa()) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 	}
 }

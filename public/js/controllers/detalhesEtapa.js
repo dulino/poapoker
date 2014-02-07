@@ -168,7 +168,7 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
             });
       })
       .error(function(data, status) {
-        console.log(data.error.message);
+        console.log(data);
       });
   
   }
@@ -176,6 +176,7 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
   $scope.eliminarJogadorEtapa = function(etapaJogadorId) {
       $http.post('/detalhes/eliminajogador/' + etapaJogadorId )
         .success(function(data, status) {
+          console.log('sucesso');
           console.log(data);
           $http({ method: 'GET', url: 'detalhes/etapa/' + $routeParams.etapaId, cache: false }).
             success(function(data, status) {
@@ -183,6 +184,7 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
             });
         })
         .error(function(data, status) {
+          console.log('erro');
           console.log(data);
         });
   }

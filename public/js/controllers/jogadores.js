@@ -6,7 +6,7 @@ var jogadorController = angular.module('jogadoresController', []);
  
 function JogadoresCtrl($scope, $http) {
 
-  $http({ method: 'GET', url: 'jogadores', cache: true }).
+  $http({ method: 'GET', url: 'jogadores', cache: false }).
     success(function(data, status) {
       $scope.jogadores = data;
       $scope.estadoInsert = 'show';

@@ -6,7 +6,7 @@ var rankingController = angular.module('rankingsController', []);
  
 function RankingsCtrl($scope, $http) {
 
-  $http({ method: 'GET', url: 'rankings', cache: true }).
+  $http({ method: 'GET', url: 'rankings', cache: false }).
     success(function(data, status) {
       $scope.rankings = data;
       $scope.estadoInsert = 'show';
