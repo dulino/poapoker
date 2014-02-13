@@ -28,6 +28,7 @@ Route::get('detalhes/etapa/{id}', function($id)
   return Etapa::with('jogadores')->with('jogadores.jogador')->find($id);
 });
 
+Route::get('ultimas/etapas/{tot}', 'EtapasController@ultimas');
 Route::post('detalhes/alteraaddon/{id}', 'EtapaJogadoresController@alteraAddon');
 Route::post('detalhes/alterarebuy/{id}', 'EtapaJogadoresController@alteraRebuy');
 Route::post('detalhes/eliminajogador/{id}', 'EtapaJogadoresController@eliminarJogadorEtapa');

@@ -4,6 +4,7 @@ var poapokerApp = angular.module('poapokerApp', [
   'rankingsController',
   'etapasController',
   'detalhesEtapaController',
+  'homeController',
   'ui.bootstrap',
   'xeditable'
 ]);
@@ -17,6 +18,9 @@ poapokerApp.run(function(editableOptions, editableThemes) {
 poapokerApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
+      when('/', {
+        templateUrl: 'templates/home.html'
+      }).
       when('/jogadores', {
         templateUrl: 'templates/jogadores.html',
         controller: 'JogadoresCtrl'
@@ -34,7 +38,7 @@ poapokerApp.config(['$routeProvider',
         controller: 'DetalhesEtapaCtrl'
       }).
       otherwise({
-        redirectTo: '/jogadores'
+        redirectTo: '/'
       });
   }]);
 

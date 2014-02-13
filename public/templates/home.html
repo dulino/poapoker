@@ -1,0 +1,38 @@
+<div ng-controller="HomeCtrl">
+<h3>Ranking {{ queryDescricao }}</h3>
+<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-3 form-group">
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+			<input type="text" class="form-control" id="queryRanking" name="queryRanking" list="listarankings" ng-model="queryDescricao" placeholder="Escolha um Ranking ...">
+			<datalist id="listarankings"><br/>
+				<option value="2014">2014</option>
+				<option value="2015">2015</option>
+			</datalist>
+		</div>		
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="etapa in etapas | filter:{ranking.descricao: queryDescricao}">
+			<!-- Default panel contents -->
+			<h4>{{ etapa.nome }} ({{ etapa.data | date:"dd/MM/yyyy" }}) </h4>
+			<div class="panel panel-default">
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>Posição</th>
+						<th>Jogador</th>
+						<th class="text-right">Pontos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="jogador in etapa.jogadores | orderBy:'posicao'">
+						<td>{{ jogador.posicao }}</td>
+						<td>{{ jogador.jogador.apelido }}</td>
+						<td class="text-right">{{ jogador.pontos }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+	</div>      
+</div>

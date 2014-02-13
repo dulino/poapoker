@@ -96,7 +96,7 @@
 			</thead>
 			<tbody>
 				<tr id="{{ jogador.id }}" ng-repeat="jogador in etapa.jogadores | orderBy:'posicao'">
-					<td>{{ jogador.posicao }}</td>
+					<td>{{ jogador.posicao || ''}}</td>
 					<td><button id="{{ jogador.id }}" type="button" ng-show="!(jogador.posicao > 0)" class="btn btn-default btn-xs" tooltip-placement="right" tooltip="Eliminado" ng-click="eliminarJogadorEtapa(jogador.id)">
 							<span class="glyphicon glyphicon-screenshot"></span>
 						</button> {{ jogador.jogador.apelido }}

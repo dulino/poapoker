@@ -23,8 +23,9 @@ function DetalhesEtapaCtrl($scope, $http, $routeParams) {
         $scope.eliminados = 0;
         $scope.jogando    = 0;
         angular.forEach(jogadores, function(jogador) {
-          jogador.addons = parseInt(jogador.addons);
-          jogador.rebuys = parseInt(jogador.rebuys);
+          jogador.posicao = parseInt(jogador.posicao);
+          jogador.addons  = parseInt(jogador.addons);
+          jogador.rebuys  = parseInt(jogador.rebuys);
           $scope.qtdRebuys += parseInt(jogador.rebuys);
           $scope.qtdAddons += parseInt(jogador.addons);
           if (jogador.posicao > 0) {

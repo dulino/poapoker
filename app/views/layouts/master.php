@@ -24,6 +24,7 @@
     <script src="js/controllers/rankings.js"></script>
     <script src="js/controllers/etapas.js"></script>
     <script src="js/controllers/detalhesEtapa.js"></script>
+    <script type="text/javascript" src="js/controllers/home.js"></script>
     <script src="js/app.js"></script>
 
     <script src="https://code.jquery.com/jquery.js"></script>

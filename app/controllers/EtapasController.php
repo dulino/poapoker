@@ -6,11 +6,11 @@ class EtapasController extends BaseController
 {
 	protected $layout = 'layouts.master';
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	public function ultimas($tot)
+	{
+		return Etapa::with('jogadores')->with('jogadores.jogador')->with('ranking')->orderBy('data', 'DESC')->take($tot)->get()->toJson();
+	}
+
 	public function index()
 	{
 		return Etapa::with('ranking')->get()->toJson();
