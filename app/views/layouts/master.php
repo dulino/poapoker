@@ -49,7 +49,7 @@
           <ul class="nav navbar-nav">
             <li><a href="#/rankings">Ranking</a></li>
             <li><a href="#/etapas">Etapas</a></li>
-            <li><a href="#">Jogadores</a></li>
+            <li><a href="#/jogadores">Jogadores</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
               <ul class="dropdown-menu">

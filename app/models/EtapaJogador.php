@@ -56,4 +56,5 @@ class EtapaJogador extends Eloquent
 
 		return true;
 	}
+
 }

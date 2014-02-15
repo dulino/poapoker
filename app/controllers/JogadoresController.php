@@ -4,6 +4,16 @@ class JogadoresController extends BaseController
 {
 	protected $layout = 'layouts.master';
 
+    public function rankingSemDescartes($ranking) {
+    	$jogadores = Jogador::all();
+    	$res = array();
+    	foreach ($jogadores as $jogador) {
+    		array_push($res, 'id', $jogador->id);
+    	}
+    	return $res;
+    }
+
+
 	/**
 	 * Display a listing of the resource.
 	 *

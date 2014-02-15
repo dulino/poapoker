@@ -10,7 +10,4 @@ class Jogador extends Eloquent
 		return $this->hasMany('EtapaJogador');
 	}
 
-	public function getId($value) {
-		return (int)$value;
-	}
 }
