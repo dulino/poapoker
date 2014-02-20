@@ -5,12 +5,15 @@ class JogadoresController extends BaseController
 	protected $layout = 'layouts.master';
 
     public function rankingSemDescartes($ranking) {
-    	$jogadores = Jogador::all();
-    	$res = array();
-    	foreach ($jogadores as $jogador) {
-    		array_push($res, 'id', $jogador->id);
-    	}
-    	return $res;
+    	$ranking = DB::table('etapa_jogadores')
+    		->select(DB::raw('sum(pkr_etapa_jogadores.pontos) as pontuacao, pkr_etapa_jogadores.jogador_id, pkr_jogadores.apelido'))
+            ->join('etapas', 'etapa_jogadores.etapa_id', '=', 'etapas.id')
+            ->join('jogadores', 'etapa_jogadores.jogador_id', '=', 'jogadores.id')
+            ->where('etapas.ranking_id', '=', $ranking)
+            ->groupBy('etapa_jogadores.jogador_id', 'jogadores.apelido')
+            ->orderBy('pontuacao', 'DESC')
+            ->get(array('etapa_jogadores.jogador_id', 'jogadores.apelido', 'pontuacao'));
+    	return $ranking;
     }
 
 
