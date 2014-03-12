@@ -15,6 +15,16 @@ class EtapaJogador extends Eloquent
 		return $this->belongsTo('Jogador');
 	}
 
+	public function getPontosAttribute($value)
+    {
+        return (int) $value;
+    }
+
+	public function getPosicaoAttribute($value)
+    {
+        return (int) $value;
+    }
+
 	public function eliminaJogadorDaEtapa()
 	{
 		$etapaId = $this->etapa_id;
