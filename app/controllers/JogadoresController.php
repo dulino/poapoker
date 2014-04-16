@@ -6,12 +6,12 @@ class JogadoresController extends BaseController
 
     public function rankingSemDescartes($ranking) {
     	$ranking = DB::table('etapa_jogadores')
-    		->select(DB::raw('sum(pkr_etapa_jogadores.pontos) as pontuacao, pkr_etapa_jogadores.jogador_id, pkr_jogadores.apelido'))
+    		->select(DB::raw('sum(pkr_etapa_jogadores.pontos) as pontuacao, min(pkr_etapa_jogadores.posicao) as melhor, pkr_etapa_jogadores.jogador_id, pkr_jogadores.apelido'))
             ->join('etapas', 'etapa_jogadores.etapa_id', '=', 'etapas.id')
             ->join('jogadores', 'etapa_jogadores.jogador_id', '=', 'jogadores.id')
             ->where('etapas.ranking_id', '=', $ranking)
             ->groupBy('etapa_jogadores.jogador_id', 'jogadores.apelido')
-            ->orderBy('pontuacao', 'DESC')
+            ->orderBy('pontuacao', 'DESC')->orderBy('melhor')
             ->get(array('etapa_jogadores.jogador_id', 'jogadores.apelido', 'pontuacao'));
     	return $ranking;
     }
