@@ -16,6 +16,12 @@ class JogadoresController extends BaseController
     	return $ranking;
     }
 
+    public function rankingComDescartes($ranking) {
+    	$ranking = DB::table('jogadores')
+    		->select(array(DB::raw('pontoscomdescarte(pkr_jogadores.id,'. $ranking .',6) as pontuacao'), 'apelido'))
+            ->get(array('jogadores.apelido', 'pontuacao'));
+    	return $ranking;
+    }
 
 	/**
 	 * Display a listing of the resource.
