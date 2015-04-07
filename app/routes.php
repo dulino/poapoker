@@ -29,7 +29,7 @@ Route::get('detalhes/etapa/{id}', function($id)
 });
 
 Route::get('ultimas/etapas/{tot}', 'EtapasController@ultimas');
-Route::get('rankingsemdescartes/{ranking}', 'JogadoresController@rankingComDescartes');
+Route::get('rankingsemdescartes/{ranking}', 'JogadoresController@rankingSemDescartes');
 Route::post('detalhes/alteraaddon/{id}', 'EtapaJogadoresController@alteraAddon');
 Route::post('detalhes/alterarebuy/{id}', 'EtapaJogadoresController@alteraRebuy');
 Route::post('detalhes/eliminajogador/{id}', 'EtapaJogadoresController@eliminarJogadorEtapa');
