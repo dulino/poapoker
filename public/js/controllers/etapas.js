@@ -6,7 +6,7 @@ var etapaController = angular.module('etapasController', []);
  
 function EtapasCtrl($scope, $http) {
 
-  $scope.queryDescricao = '2014';
+  $scope.queryDescricao = '2015';
 
   $http({ method: 'GET', url: 'etapas', cache: false }).
     success(function(data, status) {
