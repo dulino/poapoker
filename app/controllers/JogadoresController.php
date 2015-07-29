@@ -30,7 +30,11 @@ class JogadoresController extends BaseController
 	 */
 	public function index()
 	{
-		return Jogador::all(array('id','nome','apelido'));
+		$nome = Input::get('name');
+		if ($nome!="") 
+          return Jogador::where('nome', 'LIKE', '%'.$nome.'%')->get();
+		else
+		  return Jogador::all(array('id','nome','apelido'));
 	}
 
 	/**
