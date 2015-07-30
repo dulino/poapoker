@@ -32,7 +32,7 @@ class JogadoresController extends BaseController
 	{
 		$nome = Input::get('name');
 		if ($nome!="") 
-          return Jogador::where('nome', 'LIKE', '%'.$nome.'%')->get();
+          return Jogador::where('nome', 'LIKE', '%'.$nome.'%')->orWhere('apelido', 'LIKE', '%'.$nome.'%')->get();
 		else
 		  return Jogador::all(array('id','nome','apelido'));
 	}
