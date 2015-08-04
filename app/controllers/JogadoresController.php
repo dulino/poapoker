@@ -17,9 +17,14 @@ class JogadoresController extends BaseController
     }
 
     public function rankingComDescartes($ranking) {
-    	$ranking = DB::table('jogadores')
-    		->select(array(DB::raw('pontoscomdescarte(pkr_jogadores.id,'. $ranking .',6) as pontuacao'), 'apelido'))
-            ->get(array('jogadores.apelido', 'pontuacao'));
+    	$ranking = DB::table('etapa_jogadores')
+    		->select(DB::raw('pontoscomdescarte(pkr_jogadores.id,'. $ranking .', 4) as pontuacao, min(pkr_etapa_jogadores.posicao) as melhor, pkr_etapa_jogadores.jogador_id, pkr_jogadores.apelido'))
+            ->join('etapas', 'etapa_jogadores.etapa_id', '=', 'etapas.id')
+            ->join('jogadores', 'etapa_jogadores.jogador_id', '=', 'jogadores.id')
+            ->where('etapas.ranking_id', '=', $ranking)
+            ->groupBy('etapa_jogadores.jogador_id', 'jogadores.apelido')
+            ->orderBy('pontuacao', 'DESC')->orderBy('melhor')
+            ->get(array('etapa_jogadores.jogador_id', 'jogadores.apelido', 'pontuacao'));
     	return $ranking;
     }
 
