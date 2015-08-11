@@ -18,9 +18,10 @@ class JogadoresController extends BaseController
 
     public function rankingComDescartes($ranking) {
     	$ranking = DB::table('jogadores')
-    		->select(DB::raw('pontoscomdescarte(id, '.$ranking.', 5) as pontuacao'), 'nome')
+    		->select(DB::raw('pontoscomdescarte(id, '.$ranking.', 5) as pontuacao, pontuacoes(id, '.$ranking.') as pontuacoes, apelido, id as jogador_id'))
+            ->whereRaw('pontoscomdescarte(id, '.$ranking.', 5) > 0')
             ->orderBy('pontuacao', 'DESC')
-            ->get(array('pontuacao','nome'));
+            ->get(array('pontuacao','pontuacoes','apelido', 'jogador_id'));
     	return $ranking;
     }
 
