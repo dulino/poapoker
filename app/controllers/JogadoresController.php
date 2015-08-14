@@ -16,6 +16,18 @@ class JogadoresController extends BaseController
     	return $ranking;
     }
 
+    public function rankingHome() {
+    	$ult = DB::table('rankings')->max('id');
+
+    	$ranking = DB::table('jogadores')
+    		->select(DB::raw('pontoscomdescarte(id, '.$ult.', 5) as pontuacao, pontuacoes(id, '.$ult.') as pontuacoes, apelido, id as jogador_id, '.$ult.' as ranking_id'))
+            ->whereRaw('pontoscomdescarte(id, '.$ult.', 5) > 0')
+            ->orderBy('pontuacao', 'DESC')
+            ->get(array('pontuacao','pontuacoes','apelido', 'jogador_id', 'ranking_id'));
+
+    	return $ranking;
+    }
+
     public function rankingComDescartes($ranking) {
     	$ranking = DB::table('jogadores')
     		->select(DB::raw('pontoscomdescarte(id, '.$ranking.', 5) as pontuacao, pontuacoes(id, '.$ranking.') as pontuacoes, apelido, id as jogador_id'))
@@ -24,6 +36,28 @@ class JogadoresController extends BaseController
             ->get(array('pontuacao','pontuacoes','apelido', 'jogador_id'));
     	return $ranking;
     }
+
+    public function rankingJogador($jogador, $ranking) {
+    	$posicoes = DB::table('etapa_jogadores')
+    		->select(DB::raw('pkr_etapa_jogadores.pontos, pkr_etapa_jogadores.posicao, pkr_etapas.data, pkr_etapas.nome, pkr_etapa_jogadores.jogador_id, pkr_jogadores.apelido'))
+            ->join('etapas', 'etapa_jogadores.etapa_id', '=', 'etapas.id')
+            ->join('jogadores', 'etapa_jogadores.jogador_id', '=', 'jogadores.id')
+            ->where('etapas.ranking_id', '=', $ranking)
+            ->where('etapa_jogadores.jogador_id', '=', $jogador)
+            ->orderBy('data', 'DESC')
+            ->get(array('etapa_jogadores.pontos', 'etapa_jogadores.posicao','etapas.data', 'etapas.nome','etapa_jogadores.jogador_id', 'jogadores.apelido'));
+    	return $posicoes;
+    }
+
+	/**
+	 * Display a player.
+	 *
+	 * @return Response
+	 */
+	public function show($jogador_id)
+	{
+		return Jogador::find($jogador_id);
+	}
 
 	/**
 	 * Display a listing of the resource.

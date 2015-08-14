@@ -5,6 +5,23 @@ class EtapaJogadoresController extends BaseController
 	protected $layout = 'layouts.master';
 
 	/**
+	 * Display a player.
+	 *
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$etapaJogador = EtapaJogador::with('etapa')->find($id);
+		$etapas = EtapaJogador::where('jogador_id', '=', $etapaJogador->jogador_id)->
+		  whereHas('etapa', function($q)
+		  	{
+		  		$q->where('ranking_id', '=', 3);
+		  	})->get();
+
+		return $etapas;
+	}
+
+	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response

@@ -13,7 +13,12 @@ class EtapasController extends BaseController
 
 	public function index()
 	{
-		return Etapa::with('ranking')->get()->toJson();
+		$ranking_id = Input::get('ranking_id');
+		if ($ranking_id!="") {
+			return Etapa::with('jogadores')->with('ranking')->where('ranking_id','=', $ranking_id)->get();
+		} else {
+			return Etapa::with('jogadores')->with('ranking')->get();
+		}
 	}
 
 	/**

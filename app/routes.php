@@ -28,7 +28,9 @@ Route::get('detalhes/etapa/{id}', function($id)
   return Etapa::with('jogadores')->with('jogadores.jogador')->find($id);
 });
 
+Route::get('jogadores/{jogadorId}/{rankingId}', 'JogadoresController@rankingJogador');
 Route::get('ultimas/etapas/{tot}', 'EtapasController@ultimas');
+Route::get('home', 'JogadoresController@rankingHome');
 Route::get('rankingsemdescartes/{ranking}', 'JogadoresController@rankingSemDescartes');
 Route::get('rankingcomdescartes/{ranking}', 'JogadoresController@rankingComDescartes');
 Route::post('detalhes/alteraaddon/{id}', 'EtapaJogadoresController@alteraAddon');
